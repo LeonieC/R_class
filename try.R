@@ -13,3 +13,4 @@ fish2<-read.table('D:/R_wd/week1/R_classs/R_classs/reef_fish.txt', header=T, sep
 barplot(fish2$richness, main="Top 10 reef fish Richness (Allen, 2000)", horiz=TRUE, names.arg=fish$country, cex.names=0.5, las=1)
 
 ###
+?git push
