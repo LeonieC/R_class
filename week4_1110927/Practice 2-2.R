@@ -1,0 +1,26 @@
+library (tidyr)
+
+
+rairuoho<-read.table('https://www.dipintothereef.com/uploads/3/7/3/5/37359245/rairuoho.txt', header=T, sep='\t', dec='.') 
+rairuoho
+
+# Reformat the table in order to have the day as a single variable (factor) containing 6 levels (day3, day4, day5, day6, day7, day8).
+# Another variable length will be created to receive the length of the grass at the given day.
+rairuoho_long <- rairuoho %>% pivot_longer(day3:day8, names_to = "day", values_to = "length")
+rairuoho_long
+
+# Merge variables Spatial1 and Spatial2 in order to obtain the following format for the spatial coordinates of an observation upper_left.
+rairuoho_long_spatialcoordinates <- unite(data = rairuoho_long, col = "spatial coordinates", spatial1, spatial2, sep = "_")
+rairuoho_long_spatialcoordinates
+
+# Replace nutrient with enriched in the data set.
+rairuoho_long_spatialcoordinates$treatment<-ifelse(rairuoho_long_spatialcoordinates$treatment=='nutrient', 'enriched', 'water')
+rairuoho_long_spatialcoordinates
+
+# Remove variables row and column.
+rairuoho_long_spatialcoordinates$row<-NULL
+rairuoho_long_spatialcoordinates$column<-NULL
+rairuoho_long_spatialcoordinates
+
+
+
