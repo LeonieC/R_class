@@ -10,8 +10,9 @@ rairuoho_long <- rairuoho %>% pivot_longer(day3:day8, names_to = "day", values_t
 rairuoho_long
 
 # Merge variables Spatial1 and Spatial2 in order to obtain the following format for the spatial coordinates of an observation upper_left.
-rairuoho_long_spatialcoordinates <- unite(data = rairuoho_long, col = "spatial coordinates", spatial1, spatial2, sep = "_")
+rairuoho_long_spatialcoordinates <- rairuoho_long %>% unite("spatial coordinates", spatial1:spatial2, remove = T )
 rairuoho_long_spatialcoordinates
+#Old way ->->  rairuoho_long_spatialcoordinates <- unite(data = rairuoho_long, col = "spatial coordinates", spatial1, spatial2, sep = "_")  ->-> already update the new one
 
 # Replace nutrient with enriched in the data set.
 rairuoho_long_spatialcoordinates$treatment<-ifelse(rairuoho_long_spatialcoordinates$treatment=='nutrient', 'enriched', 'water')
@@ -21,6 +22,4 @@ rairuoho_long_spatialcoordinates
 rairuoho_long_spatialcoordinates$row<-NULL
 rairuoho_long_spatialcoordinates$column<-NULL
 rairuoho_long_spatialcoordinates
-
-
 
