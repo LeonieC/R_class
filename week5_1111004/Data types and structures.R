@@ -75,7 +75,11 @@ dim(iris.sel)
 str(iris)
 str(iris.sel)
 
-boxplot(Petal.width)            #######補
+boxplot(Petal.Width~Species, iris.sel, horizontal = TRUE)
+droplevels(iris.sel$Species)
+
+iris.sel$Species<-droplevels(iris.sel$Species)
+boxplot(Petal.Width~Species, iris.sel, horizontal = TRUE)
 
 
 
@@ -177,3 +181,4 @@ M$qr$rank
 y   <- c("23.8", "6", "100.01","6")
 y.c <- as.numeric(y)
 y.c
+
