@@ -26,6 +26,11 @@ library(marmap)
 library(leaflet)
 
 
+##### 處理package下載
+# remove.packages("package")
+# install.packages("package")
+
+
 
 ### Basic map
 
@@ -179,7 +184,7 @@ text(121.53,24.921335,"NTU", col='white', font=2)
 # adding scale
 maps::map.scale(x=120, y=25.4)
 # adding north arrow
-GISTools::north.arrow(xb=120.3,yb=24.7, len=0.06, lab='N')   #??????????????下載不了
+GISTools::north.arrow(xb=120.3,yb=24.7, len=0.06, lab='N')   # 被刪除了...下載不了
 
 install.packages("GISTools")
 install.packages("GISTools", dependencies = TRUE)
@@ -212,12 +217,6 @@ dev.off()
 ### ggplot2 & sf
 library("ggplot2")
 library("sf")
-
-############  處理?????????????????????? 檢查today's all package
-remove.packages("e1071")
-install.packages("e1071")
-library("sf")
-
 
 ## Theme and datasets
 
@@ -326,9 +325,9 @@ ggplot(data = world) +
 
 ### Exporting map
 
-ggsave("Figures/Datamap.pdf")
-ggsave("Figures/map_web.png", width = 6, height = 6, dpi = "screen")
-# ???????????????????????????????????????????????????????????????????????????? how to save pic??
+ggsave("Datamap.pdf")   # 以名字Datamap、pdf形式，直接存到工作檔案(workplace)中
+ggsave("Figures/map_web.png", width = 6, height = 6, dpi = "screen") #  以名字Datamap、png形式，存到資料夾Figures中
+
 
 
 ### Special
@@ -363,9 +362,9 @@ plot.bathy(TW.bathy,
            lwd=c(0.3,1,1,2),   # 線粗細
            lty=c(1,1,1,1),   # 線的形式(虛線or實線)：1=實線
            col=c("grey","black","black","black"),    # 線的顏色
-           drawlabels=c(T,T,T,F),   # ???
-           bpal = list(c(0,max(TW.bathy),greys(100)),c(min(TW.bathy),0,blues(100))),   # ???
-           land=T, xaxs="i")  # ???
+           drawlabels=c(T,T,T,F),   # 要不要畫深度線
+           bpal = list(c(0,max(TW.bathy),greys(100)),c(min(TW.bathy),0,blues(100))),   # 前面定義的顏色；(數字)-顏色漸層分割成100份
+           land=T, xaxs="i")  # 要不要顯示land
 
 # Profiles can be extract using get.transect:
 
@@ -398,6 +397,7 @@ leaflet(taiwan) %>%
   addPolygons(weight=0.5) %>%
   addProviderTiles(providers$Stamen.Toner) %>%
   addPopups(121.53725, 25.021252, FRE, options = popupOptions(closeButton = FALSE))
+
 
 
 
