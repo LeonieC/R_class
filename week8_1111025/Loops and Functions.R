@@ -182,9 +182,9 @@ grow4 <- function (growth.rate) {
   num_gen<-50
   generation<-1:num_gen
   N <- rep (0,num_gen)
-  N[1] <- 10
+  N[1] <- 10 # 族群數量從10開始
   for (i in 2:num_gen) {
-    N[i]=N[i-1]+(growth.rate*N[i-1]*((100-N[i-1])/100))
+    N[i]=N[i-1]+(growth.rate*N[i-1]*((100-N[i-1])/100)) #更改的公式
   }
   plot(N~generation, xlim=c(0,50), ylim=c(0,150), type='b', main=paste("Rate =", growth.rate))
 }
