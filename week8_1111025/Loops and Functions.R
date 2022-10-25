@@ -182,19 +182,7 @@ grow4 <- function (growth.rate) {
   num_gen<-50
   generation<-1:num_gen
   N <- rep (0,num_gen)
-  N[1] <- 1
-  for (i in 1:num_gen) {
-    N[i+1]=N[i]+(growth.rate*N[i]*((100-N[i])/100))
-  }
-  plot(N~generation, xlim=c(0,10), ylim=c(0,100000), type='b', main=paste("Rate =", growth.rate))
-}
-
-
-grow4 <- function (growth.rate) { 
-  num_gen<-50
-  generation<-1:num_gen
-  N <- rep (0,num_gen)
-  N[1] <- 1
+  N[1] <- 10
   for (i in 2:num_gen) {
     N[i]=N[i-1]+(growth.rate*N[i-1]*((100-N[i-1])/100))
   }
@@ -221,4 +209,6 @@ saveGIF({
   for (i in seq(1,4, by=0.2)){ # growth.rate 1~4 , 間隔0.2 --> 1.0, 1.2, ..., 3.8, 4.0
     grow4(i)
   }}, interval=0.2) # interval --> change GIF's speed ; lower faster
+
+
 
