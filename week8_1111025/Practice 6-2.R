@@ -1,3 +1,5 @@
+### Practice 6.2 
+
 library(animation)
 library(ggplot2)
 library (gganimate)
