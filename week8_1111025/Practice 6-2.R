@@ -1,0 +1,64 @@
+library(animation)
+library(ggplot2)
+library (gganimate)
+
+
+
+# WRONG CODE
+# ADVICES: START FROM SCRATCH, 
+# JUST GET INSPIRATION FROM MY CODE, WORK STEP BY STEP
+grow <- NULL
+
+
+grow<-function(start_1, start_2){
+  num_gen<-30
+  N1 <- rep(0,num_gen)
+  N2 <- rep(0,num_gen)
+  generation<- 1:num_gen
+  growth.rate<-1.2
+  K1<-100
+  K2<-120
+  a12<-0.8
+  a21<-0.8
+  N1[1]<-start_1
+  N2[1]<-start_2
+  for (i in 2:num_gen)  {
+    N1[i] = N1[i-1] + (1.2* N1[i-1] * ((K1-N1[i-1]-(a12*N2[i-1]))/K1))
+    N2[i] = N2[i-1] + (growth.rate * N2[i-1] * ((K2-N2[i-1]-(a21*N1[i-1]))/K2))
+    generation[1]=1
+    print (N1[i])
+  }
+if (N1[1]>0){
+  plot(N1~generation,typ="b",ylim=c(0,max(c(N1,N2))),ylab="N")
+}  else {
+  plot(N1~generation,typ="n",ylim=c(0,max(c(N1,N2))),ylab="N")
+}
+print(N2[1])
+if (N2[1]>0){
+  lines(N2~generation,typ="b",col=3,ylim=c(0,max(c(N1,N2))),ylab="N")
+} }
+
+
+dev.off()
+par(mar=c(5,4,1,1),mfrow=c(3,1),las=1)
+
+
+grow(1,0)
+text(2.5,90,"Species 1 alone")
+  
+grow(0,1)
+text(2.5,110,"Species 2 alone")
+
+grow(1,2)
+text(3.5,95,"Both Species competing")
+  
+  
+
+# Make an animation
+saveGIF({
+  for (i in seq(0,100, by=10)){ 
+    grow(i/2, i)
+  }}, movie.name = 'Species competing.gif', interval=0.2) 
+
+
+
