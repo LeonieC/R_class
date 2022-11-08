@@ -401,6 +401,7 @@ library(ggplot2)</code></pre>
 ## 
 ##     combine</code></pre>
 <pre class="r"><code>library(car)</code></pre>
+<pre><code>## Warning: 套件 &#39;car&#39; 是用 R 版本 4.2.2 來建造的</code></pre>
 <pre><code>## 載入需要的套件：carData</code></pre>
 <pre><code>## 
 ## 載入套件：&#39;car&#39;</code></pre>
@@ -672,24 +673,24 @@ my.t.test &lt;- function(x, y) {
   n.y &lt;- length(y)
   t_value = (m.x-m.y)/sqrt((sd.x^2)/n.x+(sd.y^2)/n.y)
   df= (length(x)-1)+(length(y)-1)
-  p= pt(t_value, df, lower.tail = F)  ## pt(q, df, ncp, lower.tail = TRUE, log.p = FALSE)
+  p= 2*pt(t_value, df, lower.tail = F)  ## pt(q, df, ncp, lower.tail = TRUE, log.p = FALSE)
   paste(&#39;t=&#39;, t_value, &#39;, degree_of_freedom=&#39;, df, &#39; , p = &#39;, p)
 
 }
 
 # Try my.t.test
 my.t.test(rai.day3[rai.day3$treatment==&quot;water&quot;,]$length, rai.day3[rai.day3$treatment==&quot;nutrient&quot;,]$length)</code></pre>
-<pre><code>## [1] &quot;t= 0.647366633331903 , degree_of_freedom= 46  , p =  0.260306248281443&quot;</code></pre>
+<pre><code>## [1] &quot;t= 0.647366633331903 , degree_of_freedom= 46  , p =  0.520612496562886&quot;</code></pre>
 <pre class="r"><code>my.t.test(rai.day4[rai.day4$treatment==&quot;water&quot;,]$length, rai.day4[rai.day4$treatment==&quot;nutrient&quot;,]$length)</code></pre>
-<pre><code>## [1] &quot;t= -0.0386842381604197 , degree_of_freedom= 46  , p =  0.515345227922417&quot;</code></pre>
+<pre><code>## [1] &quot;t= -0.0386842381604197 , degree_of_freedom= 46  , p =  1.03069045584483&quot;</code></pre>
 <pre class="r"><code>my.t.test(rai.day5[rai.day5$treatment==&quot;water&quot;,]$length, rai.day5[rai.day5$treatment==&quot;nutrient&quot;,]$length)</code></pre>
-<pre><code>## [1] &quot;t= -0.449883632110376 , degree_of_freedom= 46  , p =  0.672546341698413&quot;</code></pre>
+<pre><code>## [1] &quot;t= -0.449883632110376 , degree_of_freedom= 46  , p =  1.34509268339683&quot;</code></pre>
 <pre class="r"><code>my.t.test(rai.day6[rai.day6$treatment==&quot;water&quot;,]$length, rai.day6[rai.day6$treatment==&quot;nutrient&quot;,]$length)</code></pre>
-<pre><code>## [1] &quot;t= -1.20432728117745 , degree_of_freedom= 46  , p =  0.882688310631433&quot;</code></pre>
+<pre><code>## [1] &quot;t= -1.20432728117745 , degree_of_freedom= 46  , p =  1.76537662126287&quot;</code></pre>
 <pre class="r"><code>my.t.test(rai.day7[rai.day7$treatment==&quot;water&quot;,]$length, rai.day7[rai.day7$treatment==&quot;nutrient&quot;,]$length)</code></pre>
-<pre><code>## [1] &quot;t= -2.77860250107231 , degree_of_freedom= 46  , p =  0.996061031613571&quot;</code></pre>
+<pre><code>## [1] &quot;t= -2.77860250107231 , degree_of_freedom= 46  , p =  1.99212206322714&quot;</code></pre>
 <pre class="r"><code>my.t.test(rai.day8[rai.day8$treatment==&quot;water&quot;,]$length, rai.day8[rai.day8$treatment==&quot;nutrient&quot;,]$length)</code></pre>
-<pre><code>## [1] &quot;t= -4.20376196564581 , degree_of_freedom= 46  , p =  0.999940144210265&quot;</code></pre>
+<pre><code>## [1] &quot;t= -4.20376196564581 , degree_of_freedom= 46  , p =  1.99988028842053&quot;</code></pre>
 
 
 

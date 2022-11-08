@@ -74,7 +74,7 @@ my.t.test <- function(x, y) {
   n.y <- length(y)
   t_value = (m.x-m.y)/sqrt((sd.x^2)/n.x+(sd.y^2)/n.y)
   df= (length(x)-1)+(length(y)-1)
-  p= pt(t_value, df, lower.tail = F)  ## pt(q, df, ncp, lower.tail = TRUE, log.p = FALSE)
+  p= 2*pt(t_value, df, lower.tail = F)  ## pt(q, df, ncp, lower.tail = TRUE, log.p = FALSE)
   paste('t=', t_value, ', degree_of_freedom=', df, ' , p = ', p)
 
 }
