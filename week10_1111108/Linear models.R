@@ -97,3 +97,98 @@ plot(model1)   # enter *4 -> 四種圖
 
 
 
+###### 11/22 #######
+### Regression diagnostics --> improtant need remember!
+
+## Diagnostic plots
+
+
+### Bootstrap
+
+## Dataset Simulation
+
+set.seed(2021)
+n <- 1000
+x <- rnorm(n)
+y <- x + rnorm(n)
+population.data <- as.data.frame(cbind(x, y))
+
+sample.data <- population.data[sample(nrow(population.data), 20, replace = TRUE),]
+
+population.data
+sample.data
+
+
+## Simple regression models
+
+population.model <- lm(y~x, population.data)
+summary (population.data)
+
+sample.model <- lm(y~x, sample.data) # lm just on our sample
+summary (sample.model)
+# we will expect Estimate of sample will similar with population
+
+# Bootstrap Approach --> repeat 1000 times up,趨於鐘形分布 --> to se if you are something stable
+
+# Containers for the coefficients
+sample_coef_intercept <- NULL
+sample_coef_x1 <- NULL
+
+for (i in 1:1000) {
+  #Creating a resampled dataset from the sample data
+  sample_d = sample.data[sample(1:nrow(sample.data), nrow(sample.data), replace = TRUE), ]
+  
+  #Running the regression on these data
+  model_bootstrap <- lm(y ~ x, data = sample_d)
+  
+  #Saving the coefficients
+  sample_coef_intercept <-
+    c(sample_coef_intercept, model_bootstrap$coefficients[1])
+  
+  sample_coef_x1 <-
+    c(sample_coef_x1, model_bootstrap$coefficients[2])
+}
+
+coefs <- rbind(sample_coef_intercept, sample_coef_x1)
+coefs
+
+
+## Cross Validation
+
+
+
+
+
+
+
+
+### Comparing Models
+
+install.packages("MBESS")
+library(MBESS)
+data(prof.salary)
+
+fit.prof1 <- lm(salary~pub, data=prof.salary)
+fit.prof2  <- lm(salary~citation, data=prof.salary)
+fit.prof3 <- lm(salary~pub+citation, data=prof.salary)
+fit.prof4  <- lm(salary~citation+pub, data=prof.salary)
+
+# compare model 3 to model 1 - stepping approach, evaluating a new variable (cits)
+anova(fit.prof1,fit.prof3)# note this is anova, not Anova
+
+# compare model 3 to model 2 - stepping approach, evaluating a new variable (pubs)
+anova(fit.prof2,fit.prof3)# note this is anova, not Anova
+
+
+
+### Variable Selection
+
+# Akaike Information Criterion (AIC) --> 檢視哪個model比較好
+# The AIC replaces log(n) by 2, so it penalizes less complex models.
+# 少變數 --> 用AIC // 複雜者 --> 用BIC
+
+# stepAIC() and stepBIC() --> 諸多因子中，推薦較適合開始分析的簡單因子
+
+# model.full <- lm(salary ~., data = prof.salary) --> salary ~. => "." means everything(every variable)
+
+
