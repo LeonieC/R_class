@@ -192,3 +192,48 @@ anova(fit.prof2,fit.prof3)# note this is anova, not Anova
 # model.full <- lm(salary ~., data = prof.salary) --> salary ~. => "." means everything(every variable)
 
 
+
+
+###### 11/29 #######
+### F-tests
+
+### Anova models
+
+students<-read.table('https://www.dipintothereef.com/uploads/3/7/3/5/37359245/students.txt',header=T, sep="\t", dec='.') 
+lm.cat<-lm(shoesize~gender, data=students)
+anova(lm.cat)
+
+iris.lm<-lm(Petal.Width ~ Species, data=iris)
+summary(iris.lm)
+
+anova(iris.lm)
+
+
+## Full-factorial between-subjects ANOVA
+
+pirateplot(formula = time ~ cleaner + type,
+           data = poopdeck,
+           ylim = c(0, 150),
+           xlab = "Cleaner",
+           ylab = "Cleaning Time (minutes)",
+           main = "poopdeck data",
+           back.col = gray(.97), 
+           cap.beans = TRUE, 
+           theme = 2)
+
+
+# ANOVA 只能告訴你3組之間有顯著差異,無法告訴你是誰不一樣,需要使用事後檢定(TukeyHSD)
+
+# Random Effects --> 例如:計算成績,想看進步幅度,而非最終到達分數,要考慮此random effect --> consider Individual variation
+
+# last plot --> 斜率不變, 上下會移動
+ggplot(rai, aes(x = day, y = length)) +
+  geom_line(data = newdata2,
+            color = 'blue') +
+  geom_point() +
+  scale_x_continuous(breaks = 0:7) +
+  facet_wrap(~ID) +
+  labs(y = "Length", x = "Days")
+
+# Random Intercept and slope model -> 起始能力不同(Intercept) & 進步能力不同(slope model)
+
